@@ -12,18 +12,19 @@
           // code for IE6, IE5
           xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
+        
         // function to be executed when the readyState changes
         xmlhttp.onreadystatechange = function () {
           if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             xmlDoc = xmlhttp.responseXML;
-            console.log(xmlDoc);
             txt = "";
 
-            // // get Artist elements in the XML file
+            // get Artist elements in the XML file
             // x = xmlDoc.getElementsByTagName("ARTIST");
           
             // get all the CD elements in the XML file
             var cds = xmlDoc.getElementsByTagName("CD");
+            console.log(cds);
             for (i = 0; i < cds.length; i++) {
               var title = cds[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue;
               var artist = cds[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue;
@@ -33,6 +34,8 @@
               var year = cds[i].getElementsByTagName("YEAR")[0].childNodes[0].nodeValue;
               txt += "<tr><td>"+ title + "</td><td>" + artist + "</td><td>" + country + "</td><td>" + company + "</td><td>" + price + "</td><td>" + year + "</td></tr>";
             }
+            
+            // console.log(x); // 26 artists
             // for (i = 0; i < x.length; i++) {
             //   txt += "<tr><td>"+ x[i].childNodes[0].nodeValue + "</tr></td>";
             // }
