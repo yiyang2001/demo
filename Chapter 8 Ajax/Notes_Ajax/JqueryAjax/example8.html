@@ -1,45 +1,41 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>CD Catalog</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      // Handle the change event of the select element
-      $('select[name="cds"]').change(function() {
-        var selectedArtist = $(this).val();
-        if (selectedArtist === "") {
-          $('#txtHint').html("<b>CD info will be listed here...</b>");
-          return;
-        }
-
-        // Make an AJAX request
-        $.ajax({
-          url: 'getcd.php',
-          type: 'GET',
-          data: {q: selectedArtist},
-          success: function(response) {
-            // Display the CD information
-            $('#txtHint').html(response);
-          },
-          error: function(xhr, status, error) {
-            console.error(error);
+  <head>
+    <title>CD Catalog</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Handle the change event of the select element
+        $('select[name="cds"]').change(function () {
+          var selectedArtist = $(this).val();
+          if (selectedArtist === "") {
+            $("#txtHint").html("<b>CD info will be listed here...</b>");
+            return;
           }
+
+          // Make an AJAX request
+          $.get("getcd2.php?q=" + selectedArtist, function (response, status) {
+            if (status == "success") {
+              // Display the CD information
+              $("#txtHint").html(response);
+            } else {
+              console.error(error);
+            }
+          });
         });
       });
-    });
-  </script>
-</head>
-<body>
-  <form>
-    Select a CD:
-    <select name="cds">
-      <option value="">Select a CD:</option>
-      <option value="Bob Dylan">Bob Dylan</option>
-      <option value="Bonnie Tyler">Bonnie Tyler</option>
-      <option value="Dolly Parton">Dolly Parton</option>
-    </select>
-  </form>
-  <div id="txtHint"><b>CD info will be listed here...</b></div>
-</body>
+    </script>
+  </head>
+  <body>
+    <form>
+      Select a CD:
+      <select name="cds">
+        <option value="">Select a CD:</option>
+        <option value="Bob Dylan">Bob Dylan</option>
+        <option value="Bonnie Tyler">Bonnie Tyler</option>
+        <option value="Dolly Parton">Dolly Parton</option>
+      </select>
+    </form>
+    <div id="txtHint"><b>CD info will be listed here...</b></div>
+  </body>
 </html>

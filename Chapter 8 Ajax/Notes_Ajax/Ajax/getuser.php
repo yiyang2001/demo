@@ -1,10 +1,10 @@
 <?php
-$q=$_GET["q"];
+$q=$_GET["q"]; // 1
 
 $con = mysqli_connect('localhost', 'root', '','ajax_demo') OR
   die('Could not connect: ' . mysqli_error($con));
   
-$sql="SELECT * FROM users WHERE id = '".$q."'";
+$sql="SELECT * FROM users WHERE firstname = '".$q."'";
 
 $result = mysqli_query($con,$sql);
 

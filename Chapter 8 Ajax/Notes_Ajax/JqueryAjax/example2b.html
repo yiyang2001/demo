@@ -6,12 +6,12 @@
       $(document).ready(function () {
         $("button").click(function () {
           $.post(
-            "demo_test_post.php",
+            "demo_test_post.php", // url
             {
-              name: "Donald Duck",
+              name: "Donald Duck", // data
               city: "Duckburg",
             },
-            function (data, status) {
+            function (data, status) { // callback
               alert("Data: " + data + "\nStatus: " + status);
               $("#myDiv").text(data);
             }

@@ -6,8 +6,8 @@
       $(document).ready(function () {
         $("button").click(function () {
           $("#div1").load(
-            "demo_tests.txt",
-            function (responseTxt, statusTxt, xhr) {
+            "demo_test.txt",// url
+            function (responseTxt, statusTxt, xhr) { // call back function
               if (statusTxt == "success")
                 alert("External content loaded successfully!");
               if (statusTxt == "error")

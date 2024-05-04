@@ -1,16 +1,17 @@
 <?php
-$q = $_GET["q"];
+$q = $_GET["q"]; //Bonnie Tyler
 
 // Load XML file
 $xmlDoc = new DOMDocument(); // Create a new DOMDocument object
 $xmlDoc->load("cd_catalog.xml"); // Load the XML file
+
 
 $x = $xmlDoc->getElementsByTagName('ARTIST'); // Get all elements with the tag name "ARTIST"
 // $x is the array of ARTIST element , DOMNodeList Object ( [length] => 26 )
 // print the DOMNodeList Object ( [length] => 26 )
 
 echo "<pre>";
-// print_r($x->item(0));
+// print_r($x->item(0)->childNodes->item(0)->nodeValue);
 // print_r($x->item(0)->childNodes->item(0));
 echo "</pre>";
 
@@ -23,6 +24,7 @@ for ($i = 0; $i <= $x->length - 1; $i++) {
   if ($x->item($i)->nodeType == XML_ELEMENT_NODE) { // Check if the node type is an element node
     // Check if the node value is equal to the query
     if ($x->item($i)->childNodes->item(0)->nodeValue == $q) {
+      // print_r($x->item($i)->childNodes->item(0)->nodeValue);
       // Output the CD information
       $y = ($x->item($i)->parentNode); // $y is the parent node of the current CD element
       // echo "<pre>";
@@ -45,9 +47,6 @@ for ($i = 0; $i < $cd->length; $i++) {
   // Check if the node type is an element node (nodeType == 1), if nodeType == 0, it is a text node
   if ($cd->item($i)->nodeType == XML_ELEMENT_NODE) {
     // Output the node name and value
-    // echo "<pre>";
-    // print_r($cd->item($i));
-    // echo "</pre>";
     echo ("<b>" . $cd->item($i)->nodeName . ":</b> ");
     echo ($cd->item($i)->nodeValue);
     echo ("<br>");

@@ -25,6 +25,14 @@
           }
         });
       }
+
+      function myFunction2(){
+        loadXMLDoc("demo_get.php", function () {
+          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("myDiv2").innerHTML = xmlhttp.responseText;
+          }
+        });
+      }
     </script>
   </head>
   <body>
@@ -32,5 +40,7 @@
     <div id="myDiv2"><h2>Let AJAX2 change this text</h2></div>
 
     <button type="button" onclick="myFunction()">Change Content</button>
+    <button type="button" onclick="myFunction2()">Change Content 2</button>
+
   </body>
 </html>
