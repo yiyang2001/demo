@@ -1,0 +1,68 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+
+<body> 
+
+	<!-- DIV element will display response -->
+	<div id="box"> 
+		Ajax Request Data ( Asynchronous Call ) 
+		will Display here:</div> <br><br> 
+
+	<!-- DIV second element to display random data -->
+	<div id="box2"> 
+		The data form javascript method 
+		will display here.</div> <br><br> 
+
+	<!-- button -->
+	<button onclick="call_function()"> 
+		Click here</button> 
+
+	<!-- Ajax-JQuery CDN Link -->
+	<script src= 
+"https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"> 
+	</script> 
+
+	<script> 
+
+		call_function = () => { 
+
+			// $.ajax() method. 
+			$.ajax({ 
+
+				// Server page from where we 
+				// want to access the data. 
+				url: "index.html", 
+
+				// Method of requesting data. 
+				type: "GET", 
+
+				// Asynchronous request. 
+				async: true, 
+
+				// Success function 
+				success: function (response) { 
+					// Get the response and insert into div element 
+					// whose id is "#box". 
+					document.getElementById("box") 
+						.innerHTML = response; 
+				}, 
+
+				// data type of requested data 
+				dataType: "HTML", 
+
+				// Error function will run if any error will occur. 
+				error: function (status) { 
+					alert(error); 
+				} 
+			}); 
+
+			// Get the response of div whose ID is "box" 
+			// and insert into div element 
+			// whose id is "#box2".		 
+			document.getElementById("box2").innerHTML = document 
+					.getElementById("box").innerHTML; 
+		} 
+	</script> 
+</body> 
+
+</html>

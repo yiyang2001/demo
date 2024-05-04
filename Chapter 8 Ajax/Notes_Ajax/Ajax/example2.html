@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      function loadXMLDoc() {
+        // Step 1 : create the XMLHttpRequest object
+        var xmlhttp; // variable to store the XMLHttpRequest object
+        // check if the browser supports XMLHttpRequest (code for IE7+, Firefox, Chrome, Opera, Safari)
+        if (window.XMLHttpRequest) { 
+          // create the XMLHttpRequest object
+          xmlhttp = new XMLHttpRequest();
+        } else { // code for IE6, IE5
+          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        // Step 3: function to be executed when the readyState changes
+        xmlhttp.onreadystatechange = function () {
+          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            console.log(xmlhttp.readyState + ": request complete and ready")
+            document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
+          }
+          else{
+            console.log(xmlhttp.readyState);
+          }
+        };
+
+        // Step 2 : specify the type of request and the URL
+        xmlhttp.open("GET", "demo_get.php", true);
+        xmlhttp.send();
+      }
+    </script>
+  </head>
+  <body>
+    <h2>AJAX</h2>
+    <button type="button" onclick="loadXMLDoc()">Request data</button>
+    <div id="myDiv"></div>
+  </body>
+</html>

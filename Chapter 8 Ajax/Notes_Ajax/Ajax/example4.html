@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      function loadXMLDoc() {
+        var xmlhttp; // variable to hold an XMLHttpRequest object
+        var txt, x, i; // variables to hold the response from the server
+        if (window.XMLHttpRequest) {
+          // code for IE7+, Firefox, Chrome, Opera, Safari
+          xmlhttp = new XMLHttpRequest();
+        } else {
+          // code for IE6, IE5
+          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        // function to be executed when the readyState changes
+        xmlhttp.onreadystatechange = function () {
+          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            xmlDoc = xmlhttp.responseXML;
+            console.log(xmlDoc);
+            txt = "";
+
+            // // get Artist elements in the XML file
+            // x = xmlDoc.getElementsByTagName("ARTIST");
+          
+            // get all the CD elements in the XML file
+            var cds = xmlDoc.getElementsByTagName("CD");
+            for (i = 0; i < cds.length; i++) {
+              var title = cds[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue;
+              var artist = cds[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue;
+              var country = cds[i].getElementsByTagName("COUNTRY")[0].childNodes[0].nodeValue;
+              var company = cds[i].getElementsByTagName("COMPANY")[0].childNodes[0].nodeValue;
+              var price = cds[i].getElementsByTagName("PRICE")[0].childNodes[0].nodeValue;
+              var year = cds[i].getElementsByTagName("YEAR")[0].childNodes[0].nodeValue;
+              txt += "<tr><td>"+ title + "</td><td>" + artist + "</td><td>" + country + "</td><td>" + company + "</td><td>" + price + "</td><td>" + year + "</td></tr>";
+            }
+            // for (i = 0; i < x.length; i++) {
+            //   txt += "<tr><td>"+ x[i].childNodes[0].nodeValue + "</tr></td>";
+            // }
+            // // change the content of the element with id="myDiv"
+            document.getElementById("myDiv").innerHTML = txt; 
+          }
+        };
+        // specify the type of request and the URL to get the XML file from the server 
+        // the file is called "cd_catalog.xml"
+        xmlhttp.open("GET", "cd_catalog.xml", true);
+        xmlhttp.send();
+      }
+    </script>
+  </head>
+
+  <body>
+    <h2>My CD Collection:</h2>
+    <table id="myDiv" border="1"></table>
+    <button type="button" onclick="loadXMLDoc()">Get my CD collection</button>
+  </body>
+</html>
